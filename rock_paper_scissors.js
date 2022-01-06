@@ -1,5 +1,12 @@
-function rock_paper_scissors() {};
+let gamesPlayed = 0
+let points = 0.
+points = points.toFixed(1)
 
+function rock_paper_scissors(){ 
+    for (gamesPlayed=0; gamesPlayed < 6;gamesPlayed++ ){
+        computerPlay()
+    };
+};
 function computerPlay(){
 
 function getRandomInt(max) {
@@ -54,9 +61,24 @@ function whoWon() {
         return "You Lose"};
     }else return "You Win!"
 };
-console.log(cC);
-console.log(pC);
-whoWon();
-console.log(whoWon);
+    const result =whoWon();
+
+    function countWins() {
+        if (result === 'Draw'){
+           points = parseFloat(points) + .5
+        }else if (result ==="You Win!"){
+           points++
+        }else {return points}
+    };
+
+
+
+
+console.log(result);
+countWins();
+console.log('gamesPlayed'+' ' + gamesPlayed)
+console.log('points' +' ' +points)
+
 };
-computerPlay();
+rock_paper_scissors();
+
