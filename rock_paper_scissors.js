@@ -1,84 +1,128 @@
+function match(){
+    
 let gamesPlayed = 0
-let points = 0.
-points = points.toFixed(1)
+let points = 0
+let playerPoints = points.toFixed(1)
+let computerPoints = points.toFixed(1)
 
-function rock_paper_scissors(){ 
-    for (gamesPlayed=0; gamesPlayed < 6;gamesPlayed++ ){
-        computerPlay()
-    };
+const button1 = document.querySelector('.button1')
+const button2 = document.querySelector('.button2')
+const button3 = document.querySelector('.button3')
+const results = document.querySelector('.results')
+const playerScore = document.querySelector('.playerPoints')
+const computerScore = document.querySelector('.computerPoints')
+const winner =document.querySelector('.winner')
+
+function matchScore(){if (gamesPlayed >= 5){
+    if (playerPoints > computerPoints){
+        winner.textContent = ('You win!');
+    }else if (playerPoints < computerPoints){
+        winner.textContent = ('Computer Wins!');
+    }else
+        winner.textContent = ('Draw!');
+}
 };
-function computerPlay(){
 
 function getRandomInt(max) {
 return Math.random() * max;
 };
 
-/* I want the player to choose an imput here
-*/
-let playerChoice = prompt("Rock Paper Scissors?").toLowerCase()
+const rock = button1.addEventListener('click',()=>{
+    let playerChoice = 'rock'
+    console.log(playerChoice);
+    playRound(playerChoice);
+});
 
-if (playerChoice === "rock"){
-    alert("You chose Rock");
-}else if (playerChoice === "paper"){
-    alert("You chose Paper");
-}else if (playerChoice === "scissors"){
-    alert("You chose Scissors");
-}else{alert("What?")};
+const paper = button2.addEventListener('click',()=>{
+    let playerChoice = "paper"
+    console.log(playerChoice);
+    playRound(playerChoice);
+});
 
-/*here I want the computer to choose*/
-let computerChoice = Math.round(getRandomInt(3))
+const scissors = button3.addEventListener('click',()=>{
+    let playerChoice = "scissors"
+    console.log(playerChoice);
+    playRound(playerChoice);
+});
 
-function computerSelection(){
+function playRound(playerChoice){
+    gamesPlayed++
     
-    if (computerChoice=== 3){ 
-    return "paper"
-    }
-    else if (computerChoice=== 2){
-    return "rock"
-    }
-    else {
-    return "scissors"
-    }
-};
-let cC =computerSelection()
+    let computerChoice = Math.round(getRandomInt(3))
+
+    function computerSelection(){
+        
+        if (computerChoice=== 3){ 
+        return "paper"
+        }
+        else if (computerChoice=== 2){
+        return "rock"
+        }
+        else {
+        return "scissors"
+        }
+    };
+let cC = computerSelection()
 let pC = playerChoice
 
 /* I want to see who wins here and announce the result */
 
 function whoWon() {
+    matchScore();
+    console.log(cC);
     if (pC === cC){
-        return "Draw"
+        console.log('draw');
+        return "Draw";
     }else if (pC === "rock"){
         if (cC === "paper"){
-        return "You lose"
-        }else return "You Win!"
-    }else if (pC === "paper"){
+        console.log('You Lose');
+        return "You lose";
+        }
+        else{
+        console.log('You Win');
+        return "You Win!";
+        }
+    }
+    else if (pC === "paper"){
         if (cC === "scissors"){
-        return "You Lose"
-        }else return "You Win!"
+            console.log('You Lose');
+            return "You Lose";
+        
+        }else{
+            console.log('You Win')
+            return "You Win!";
+        };
     }else if (pC === "scissors"){
         if (cC === "rock"){
-        return "You Lose"};
-    }else return "You Win!"
+            console.log('You Lose');
+            return "You Lose"; 
+    }else{
+        console.log('You Win');
+        return "You Win!";
+    }
+    
+}
+     
 };
-    const result =whoWon();
+const result =whoWon();
 
-    function countWins() {
-        if (result === 'Draw'){
-           points = parseFloat(points) + .5
-        }else if (result ==="You Win!"){
-           points++
-        }else {return points}
-    };
-
-
-
-
-console.log(result);
+function countWins() {
+    if (result === 'Draw'){
+        computerPoints = parseFloat(computerPoints) + .5
+        playerPoints = parseFloat(playerPoints) + .5
+    }else if (result ==="You Win!"){
+        playerPoints++
+    }else {
+        computerPoints ++
+    }
+    results.textContent = ('Games Played'+' ' + gamesPlayed);
+    playerScore.textContent = ('Your Score:'+' '+playerPoints);
+    computerScore.textContent = ('Computer Score:'+' '+computerPoints);
+};
 countWins();
-console.log('gamesPlayed'+' ' + gamesPlayed)
-console.log('points' +' ' +points)
-
+console.log(computerPoints);
+console.log(playerPoints);
+console.log('games' + ' '+gamesPlayed);
 };
-rock_paper_scissors();
-
+}
+match();
